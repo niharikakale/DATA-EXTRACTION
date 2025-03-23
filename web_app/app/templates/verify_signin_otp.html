@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Verify OTP - Sign In{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Verify OTP</h2>
+    <p>An OTP has been sent to your registered email. Please enter it below to continue.</p>
+
+    <form method="POST" action="{{ url_for('main.verify_signin_otp') }}">
+        <div class="mb-3">
+            <label for="otp" class="form-label">Enter OTP</label>
+            <input type="text" class="form-control" id="otp" name="otp" required>
+        </div>
+
+        <button type="submit" class="btn btn-success">Verify</button>
+    </form>
+</div>
+{% endblock %}

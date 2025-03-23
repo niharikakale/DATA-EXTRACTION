@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Consulting Requests{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Manage Consulting Requests</h2>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>User</th>
+                <th>Passport Number</th>
+                <th>Center Number</th>
+                <th>IELTS Scores (User)</th>
+                <th>IELTS Scores (Extracted)</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in consulting_requests %}
+            <tr>
+                <td>{{ request.id }}</td>
+                <td>{{ request.user_id }}</td>
+                <td>{{ request.passport_number }}</td>
+                <td>{{ request.center_number }}</td>
+                <td>
+                    L: {{ request.ielts_listening_score_user }}, 
+                    R: {{ request.ielts_reading_score_user }}, 
+                    W: {{ request.ielts_writing_score_user }}, 
+                    S: {{ request.ielts_speaking_score_user }}
+                </td>
+                <td>
+                    L: {{ request.ielts_listening_score_extracted or 'OCR Failed' }}, 
+                    R: {{ request.ielts_reading_score_extracted or 'OCR Failed' }}, 
+                    W: {{ request.ielts_writing_score_extracted or 'OCR Failed' }}, 
+                    S: {{ request.ielts_speaking_score_extracted or 'OCR Failed' }}
+                </td>
+                <td>
+                    {% if request.status == "verified" %}
+                        <span class="badge bg-success">Verified</span>
+                    {% elif request.status == "discrepancy_found" %}
+                        <span class="badge bg-danger">Discrepancy Found</span>
+                    {% else %}
+                        <span class="badge bg-warning">Pending</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ url_for('main.approve_consulting', consulting_id=request.id) }}" class="btn btn-success btn-sm">Approve</a>
+                    <a href="{{ url_for('main.reject_consulting', consulting_id=request.id) }}" class="btn btn-danger btn-sm">Reject</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

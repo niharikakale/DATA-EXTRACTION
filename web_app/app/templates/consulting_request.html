@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Submit Consulting Request{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Submit Consulting Request</h2>
+
+    <form method="POST" action="{{ url_for('main.consulting_request') }}" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label class="form-label">Passport Number</label>
+            <input type="text" class="form-control" name="passport_number" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Center Number</label>
+            <input type="text" class="form-control" name="center_number" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Listening Score</label>
+            <input type="number" step="0.5" class="form-control" name="ielts_listening_score_user" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Reading Score</label>
+            <input type="number" step="0.5" class="form-control" name="ielts_reading_score_user" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Writing Score</label>
+            <input type="number" step="0.5" class="form-control" name="ielts_writing_score_user" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Speaking Score</label>
+            <input type="number" step="0.5" class="form-control" name="ielts_speaking_score_user" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Upload IELTS Score Report</label>
+            <input type="file" class="form-control" name="uploaded_ielts" required>
+        </div>
+
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+</div>
+{% endblock %}

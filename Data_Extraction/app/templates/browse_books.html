@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center">Browse Books</h2>
+
+    <!-- Search Bar -->
+    <div class="input-group mb-3">
+        <input type="text" id="searchBox" class="form-control" placeholder="Search by book title..." value="{{ search_query }}">
+        <button class="btn btn-primary" onclick="searchBooks()">Search</button>
+    </div>
+
+    <!-- Books Grid -->
+    <div class="row" id="booksContainer">
+        {% for book in books.items %}
+        <div class="col-md-3 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ book.book_title }}</h5>
+                    <p class="card-text"><strong>Author:</strong> {{ book.book_author }}</p>
+                    <p class="card-text"><strong>Genre:</strong> {{ book.genre }}</p>
+                    <p class="card-text"><strong>Publisher:</strong> {{ book.publisher }}</p>
+                    <p class="card-text"><strong>Year:</strong> {{ book.year_of_publication }}</p>
+        
+                    <!-- View Book Button -->
+                    <a href="{{ url_for('main.book_details', isbn=book.ISBN) }}" class="btn btn-primary">View Book</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    <nav aria-label="Book pagination">
+        <ul class="pagination justify-content-center">
+            {% if books.has_prev %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('main.browse_books', page=books.prev_num, search=search_query) }}">Previous</a>
+                </li>
+            {% endif %}
+            
+            {% for num in books.iter_pages(left_edge=1, right_edge=1, left_current=2, right_current=2) %}
+                {% if num %}
+                    {% if num == books.page %}
+                        <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url_for('main.browse_books', page=num, search=search_query) }}">{{ num }}</a>
+                        </li>
+                    {% endif %}
+                {% else %}
+                    <li class="page-item disabled"><span class="page-link">...</span></li>
+                {% endif %}
+            {% endfor %}
+
+            {% if books.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('main.browse_books', page=books.next_num, search=search_query) }}">Next</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+
+<script>
+function searchBooks() {
+    let searchQuery = document.getElementById("searchBox").value;
+    window.location.href = `/browse_books?search=${searchQuery}`;
+}
+</script>
+
+{% endblock %}

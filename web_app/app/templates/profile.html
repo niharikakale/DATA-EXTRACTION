@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}User Profile{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>User Profile</h2>
+
+    <form method="POST" action="{{ url_for('main.profile') }}">
+        <div class="mb-3">
+            <label for="name" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ user.name }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="mobile" class="form-label">Mobile</label>
+            <input type="text" class="form-control" id="mobile" name="mobile" value="{{ user.mobile }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="dob" class="form-label">Date of Birth</label>
+            <input type="date" class="form-control" id="dob" name="dob" value="{{ user.dob }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="city" class="form-label">City</label>
+            <input type="text" class="form-control" id="city" name="city" value="{{ user.city }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="state" class="form-label">State</label>
+            <input type="text" class="form-control" id="state" name="state" value="{{ user.state }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="country" class="form-label">Country</label>
+            <input type="text" class="form-control" id="country" name="country" value="{{ user.country }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="security_question" class="form-label">Security Question</label>
+            <input type="text" class="form-control" id="security_question" name="security_question" value="{{ user.security_question }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="security_answer" class="form-label">Security Answer</label>
+            <input type="text" class="form-control" id="security_answer" name="security_answer" value="{{ user.security_answer }}" required>
+        </div>
+
+        <button type="submit" class="btn btn-success">Update Profile</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Content-Based Book Recommendations{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center">📚 Content-Based Book Recommendations</h2>
+
+    <!-- Genre Selection Dropdown -->
+    <form method="get" action="{{ url_for('content_bp.content_based') }}">
+        <div class="input-group mb-3">
+            <select class="form-select" name="genre" onchange="this.form.submit()">
+                <option value="">All Genres</option>
+                {% for genre in genres %}
+                <option value="{{ genre }}" {% if request.args.get('genre') == genre %}selected{% endif %}>
+                    {{ genre }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+    </form>
+
+    <!-- Display Recommendations -->
+    <div class="row">
+        {% if recommendations.empty %}
+            <p class="text-center text-muted">⚠️ No books found. Try rating more books for better recommendations.</p>
+        {% else %}
+            {% for index, book in recommendations.iterrows() %}
+            <div class="col-md-3 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ book['Title'] }}</h5>
+                        <p class="card-text"><strong>Author:</strong> {{ book['Author'] }}</p>
+                        <p class="card-text"><strong>Genre:</strong> {{ book['Genre'] }}</p>
+                        
+                        </a>
+                        
+                        
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

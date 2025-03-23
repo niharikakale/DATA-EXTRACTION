@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}My Consulting Request{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>My Consulting Request</h2>
+
+    {% if consulting_request %}
+        <table class="table table-bordered mt-3">
+            <tr>
+                <th>Center Number</th>
+                <td>{{ consulting_request.center_number }}</td>
+            </tr>
+            <tr>
+                <th>Test Date</th>
+                <td>{{ consulting_request.test_date }}</td>
+            </tr>
+            <tr>
+                <th>Date of Birth</th>
+                <td>{{ consulting_request.dob }}</td>
+            </tr>
+            <tr>
+                <th>Family Name</th>
+                <td>{{ consulting_request.family_name }}</td>
+            </tr>
+            <tr>
+                <th>First Name</th>
+                <td>{{ consulting_request.first_name }}</td>
+            </tr>
+            <tr>
+                <th>IELTS Scores</th>
+                <td>Listening: {{ consulting_request.ielts_listening_score }},
+                    Reading: {{ consulting_request.ielts_reading_score }},
+                    Writing: {{ consulting_request.ielts_writing_score }},
+                    Speaking: {{ consulting_request.ielts_speaking_score }}</td>
+            </tr>
+            <tr>
+                <th>Uploaded IELTS Scorecard</th>
+                <td>
+                    {% if consulting_request.uploaded_ielts %}
+                        <a href="{{ url_for('static', filename=consulting_request.uploaded_ielts) }}" target="_blank">View IELTS Scorecard</a>
+                    {% else %}
+                        Not Uploaded
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>Name Matched</th>
+                <td>{{ "✅ Yes" if consulting_request.name_matched else "❌ No" }}</td>
+            </tr>
+            <tr>
+                <th>Date of Birth Matched</th>
+                <td>{{ "✅ Yes" if consulting_request.dob_matched else "❌ No" }}</td>
+            </tr>
+        </table>
+    {% else %}
+        <p>No consulting request found.</p>
+    {% endif %}
+</div>
+{% endblock %}

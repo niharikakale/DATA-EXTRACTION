@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}Mood-Based Book Recommendations{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center">📚 Mood-Based Book Recommendations</h2>
+
+    <!-- Mood Selection Form -->
+    <form method="POST" action="{{ url_for('mood_bp.mood_based') }}">
+        <label>How do you feel today?</label>
+        <select name="mood1" class="form-select">
+            <option value="Cheerful">Cheerful</option>
+            <option value="Moody">Moody</option>
+            <option value="Calm">Calm</option>
+            <option value="Tired">Tired</option>
+        </select>
+
+        <label>What do you want to do right now?</label>
+        <select name="mood2" class="form-select">
+            <option value="Laugh and have fun">Laugh and have fun</option>
+            <option value="Reflect and relax">Reflect and relax</option>
+            <option value="Go on an adventure">Go on an adventure</option>
+            <option value="Read something emotional">Read something emotional</option>
+        </select>
+
+        <label>How would you describe your energy level?</label>
+        <select name="mood3" class="form-select">
+            <option value="High energy">High energy</option>
+            <option value="Low energy">Low energy</option>
+            <option value="Balanced energy">Balanced energy</option>
+            <option value="Very low energy">Very low energy</option>
+        </select>
+
+        <label>What kind of emotions do you feel today?</label>
+        <select name="mood4" class="form-select">
+            <option value="Happy, excited">Happy, excited</option>
+            <option value="Sad, nostalgic">Sad, nostalgic</option>
+            <option value="Peaceful, content">Peaceful, content</option>
+            <option value="Motivated, adventurous">Motivated, adventurous</option>
+        </select>
+
+        <label>What type of books do you prefer?</label>
+        <select name="mood5" class="form-select">
+            <option value="Action-packed stories">Action-packed stories</option>
+            <option value="Deep emotional stories">Deep emotional stories</option>
+            <option value="Relaxing and slow-paced">Relaxing and slow-paced</option>
+            <option value="Short and light reads">Short and light reads</option>
+        </select>
+
+        <button type="submit" class="btn btn-primary mt-3">Get Book Recommendations</button>
+    </form>
+
+    <!-- Display Selected Mood -->
+    {% if final_mood %}
+    <p class="text-center"><strong>Recommended for Mood:</strong> {{ final_mood }}</p>
+    {% endif %}
+
+    <!-- Display Recommendations -->
+    <div class="row">
+        {% if recommendations is not none and not recommendations.empty %}
+            {% for index, book in recommendations.iterrows() %}
+            <div class="col-md-3 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ book['Book-Title'] }}</h5>
+                        <p class="card-text"><strong>Author:</strong> {{ book['Book-Author'] }}</p>
+                        <p class="card-text"><strong>Genre:</strong> {{ book['Genre'] }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-center text-muted">⚠️ No books found. Try selecting a different mood.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+    

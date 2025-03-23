@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}My Job Applications{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>My Job Applications</h2>
+
+    {% if job_applications %}
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Job Title</th>
+                    <th>Similarity Score</th>
+                    <th>Skills Matched</th>
+                    <th>Additional Info</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for application, job in job_applications %}
+                <tr>
+                    <td>{{ job.title }}</td>
+                    <td>{{ application.similarity_score }}%</td>
+                    <td>{{ application.skills_matched }}</td>
+                    <td>{{ application.additional_info }}</td>
+                    <td>{{ application.application_status }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No job applications found.</p>
+    {% endif %}
+</div>
+{% endblock %}

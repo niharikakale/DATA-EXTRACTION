@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Add Exam{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Add a New Competitive Exam</h2>
+
+    <form method="POST" action="{{ url_for('main.add_exam') }}">
+        <div class="mb-3">
+            <label for="exam_name" class="form-label">Exam Name</label>
+            <input type="text" class="form-control" id="exam_name" name="exam_name" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Exam Description</label>
+            <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-success">Add Exam</button>
+        <a href="{{ url_for('main.manage_exams') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

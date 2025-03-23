@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}User Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Welcome, {{ session['user_name'] }}</h2>
+
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Jobs Applied</h5>
+                    <p class="card-text">{{ total_jobs_applied }}</p>
+                    <a href="{{ url_for('main.view_jobs') }}" class="btn btn-light">View Jobs</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Exams Applied</h5>
+                    <p class="card-text">{{ total_exams_applied }}</p>
+                    <a href="{{ url_for('main.view_exams') }}" class="btn btn-light">View Exams</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Consulting Status</h5>
+                    <p class="card-text">
+                        {% if consulting_request %}
+                            {{ consulting_request.status }}
+                        {% else %}
+                            No consulting request submitted.
+                        {% endif %}
+                    </p>
+                    <a href="{{ url_for('main.user_dashboard') }}" class="btn btn-light">View Status</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a href="{{ url_for('main.logout') }}" class="btn btn-danger">Logout</a>
+    </div>
+</div>
+{% endblock %}

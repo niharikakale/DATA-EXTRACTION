@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Job Applications{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Manage Job Applications</h2>
+
+    <table class="table table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>User</th>
+                <th>Job Title</th>
+                <th>Resume</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for application in applications %}
+            <tr>
+                <td>{{ application.id }}</td>
+                <td>{{ application.user_id }}</td>
+                <td>{{ application.job_id }}</td>
+                <td><a href="{{ application.resume }}" target="_blank">View Resume</a></td>
+                <td>{{ application.application_status }}</td>
+                <td>
+                    <a href="{{ url_for('main.approve_application', application_id=application.id) }}" class="btn btn-success btn-sm">Approve</a>
+                    <a href="{{ url_for('main.reject_application', application_id=application.id) }}" class="btn btn-danger btn-sm">Reject</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

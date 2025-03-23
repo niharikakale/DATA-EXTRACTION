@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Jobs{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Manage Jobs</h2>
+
+    <a href="{{ url_for('main.add_job') }}" class="btn btn-primary mb-3">Add Job</a>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Skills</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for job in jobs %}
+            <tr>
+                <td>{{ job.id }}</td>
+                <td>{{ job.title }}</td>
+                <td>{{ job.description }}</td>
+                <td>{{ job.skills_required }}</td>
+                <td>
+                    <a href="{{ url_for('main.delete_job', job_id=job.id) }}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

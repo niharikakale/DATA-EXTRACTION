@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}Home - Data Extraction System{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section text-center text-white d-flex align-items-center justify-content-center" style="background: linear-gradient(90deg, #3b7a57, #6ca965); height: 80vh;">
+    <div class="container">
+        <h1 class="fw-bold display-4">Welcome to the Data Extraction System</h1>
+        <p class="lead">Discover your next favorite book with AI-driven recommendations.</p>
+        <a href="/signup" class="btn btn-warning btn-lg fw-bold">Get Started</a>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-5">
+    <div class="container text-center">
+        <h2 class="fw-bold">Why Choose Our System?</h2>
+        <p class="text-muted">Experience AI-powered book recommendations tailored to your taste.</p>
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card shadow-lg border-0 p-4">
+                    <i class="bi bi-search text-success" style="font-size: 3rem;"></i>
+                    <h5>Personalized Recommendations</h5>
+                    <p>Our AI models analyze your reading history to recommend the best books.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-lg border-0 p-4">
+                    <i class="bi bi-book text-primary" style="font-size: 3rem;"></i>
+                    <h5>Wide Selection</h5>
+                    <p>Discover books across multiple genres and authors.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-lg border-0 p-4">
+                    <i class="bi bi-star text-danger" style="font-size: 3rem;"></i>
+                    <h5>Top-Rated Books</h5>
+                    <p>Browse the highest-rated books from fellow readers.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="py-5">
+    <div class="container text-center">
+        <h2 class="fw-bold">How It Works</h2>
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card shadow border-0 p-4">
+                    <h3 class="fw-bold">Step 1</h3>
+                    <p>Sign up and create your profile.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow border-0 p-4">
+                    <h3 class="fw-bold">Step 2</h3>
+                    <p>Rate books you've read and explore new ones.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow border-0 p-4">
+                    <h3 class="fw-bold">Step 3</h3>
+                    <p>Get AI-generated recommendations based on your preferences.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-5 text-center" style="background: linear-gradient(90deg, #3b7a57, #6ca965); color: white;">
+    <div class="container">
+        <h2 class="fw-bold">Find Your Next Book Today</h2>
+        <p class="lead">Sign up and start exploring curated book recommendations.</p>
+        <a href="/signup" class="btn btn-warning btn-lg fw-bold">Start Exploring</a>
+    </div>
+</section>
+{% endblock %}

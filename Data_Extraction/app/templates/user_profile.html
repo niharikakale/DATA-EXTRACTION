@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center mb-4">My Profile</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0 p-4">
+                <h4 class="fw-bold">User Information</h4>
+                <p><strong>Name:</strong> {{ user.name }}</p>
+                <p><strong>Email:</strong> {{ user.email }}</p>
+                <p><strong>Mobile:</strong> {{ user.mobile }}</p>
+                <p><strong>Date of Birth:</strong> {{ user.dob }}</p>
+                
+                <hr>
+                <h4 class="fw-bold">Update Profile</h4>
+                <form action="/update_profile" method="POST">
+                    <div class="mb-3">
+                        <label class="form-label">New Mobile</label>
+                        <input type="text" name="mobile" class="form-control" value="{{ user.mobile }}">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+                
+                <hr>
+                <h4 class="fw-bold">Change Password</h4>
+                <form action="/change_password" method="POST">
+                    <div class="mb-3">
+                        <label class="form-label">Current Password</label>
+                        <input type="password" name="current_password" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">New Password</label>
+                        <input type="password" name="new_password" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-danger">Change Password</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

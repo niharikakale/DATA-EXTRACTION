@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}My Consulting Request{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>My Consulting Request</h2>
+
+    {% if consulting_request %}
+        <table class="table table-bordered mt-3">
+            <tr>
+                <th>Passport Number</th>
+                <td>{{ consulting_request.passport_number }}</td>
+                <td>Extracted: {{ consulting_request.extracted_passport_number }}</td>
+            </tr>
+            <tr>
+                <th>Center Number</th>
+                <td>{{ consulting_request.center_number }}</td>
+                <td>Extracted: {{ consulting_request.extracted_center_number }}</td>
+            </tr>
+            <tr>
+                <th>Listening Score</th>
+                <td>{{ consulting_request.ielts_listening_score_user }}</td>
+                <td>Extracted: {{ consulting_request.ielts_listening_score_extracted }}</td>
+            </tr>
+            <tr>
+                <th>Reading Score</th>
+                <td>{{ consulting_request.ielts_reading_score_user }}</td>
+                <td>Extracted: {{ consulting_request.ielts_reading_score_extracted }}</td>
+            </tr>
+            <tr>
+                <th>Writing Score</th>
+                <td>{{ consulting_request.ielts_writing_score_user }}</td>
+                <td>Extracted: {{ consulting_request.ielts_writing_score_extracted }}</td>
+            </tr>
+            <tr>
+                <th>Speaking Score</th>
+                <td>{{ consulting_request.ielts_speaking_score_user }}</td>
+                <td>Extracted: {{ consulting_request.ielts_speaking_score_extracted }}</td>
+            </tr>
+        </table>
+    {% else %}
+        <p>No consulting request found.</p>
+    {% endif %}
+</div>
+{% endblock %}

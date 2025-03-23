@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Add Job{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Add a New Job</h2>
+
+    <form method="POST" action="{{ url_for('main.add_job') }}">
+        <div class="mb-3">
+            <label for="title" class="form-label">Job Title</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Job Description</label>
+            <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="skills_required" class="form-label">Required Skills</label>
+            <input type="text" class="form-control" id="skills_required" name="skills_required" placeholder="Comma separated (e.g. Python, SQL, Flask)" required>
+        </div>
+
+        <button type="submit" class="btn btn-success">Add Job</button>
+        <a href="{{ url_for('main.manage_jobs') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

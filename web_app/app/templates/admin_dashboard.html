@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Admin Dashboard</h2>
+
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Users</h5>
+                    <p class="card-text">{{ total_users }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Jobs</h5>
+                    <p class="card-text">{{ total_jobs }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Exams</h5>
+                    <p class="card-text">{{ total_exams }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card bg-danger text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Pending Job Applications</h5>
+                    <p class="card-text">{{ pending_jobs }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Pending Exam Applications</h5>
+                    <p class="card-text">{{ pending_exams }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-dark text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Pending Consulting Requests</h5>
+                    <p class="card-text">{{ pending_consulting }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a href="{{ url_for('main.manage_users') }}" class="btn btn-primary">Manage Users</a>
+        <a href="{{ url_for('main.manage_jobs') }}" class="btn btn-success">Manage Jobs</a>
+        <a href="{{ url_for('main.manage_exams') }}" class="btn btn-warning">Manage Exams</a>
+        <a href="{{ url_for('main.manage_consulting') }}" class="btn btn-info">Manage Consulting</a>
+    </div>
+</div>
+{% endblock %}

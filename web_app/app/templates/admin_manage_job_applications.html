@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Job Applications{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Manage Job Applications</h2>
+    <table class="table table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>Applicant Name</th>
+                <th>Job Title</th>
+                <th>Similarity Score</th>
+                <th>Skills Matched</th>
+                <th>Additional Info</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for application in job_applications %}
+            <tr>
+                <td>{{ application.applicant_name }}</td>
+                <td>{{ application.job_title }}</td>
+                <td>{{ application.similarity_score }}%</td>
+                <td>{{ application.skills_matched }}</td>
+                <td>{{ application.additional_info }}</td>
+                <td>
+                    <span class="badge {% if application.application_status == 'pending' %}bg-warning
+                                    {% elif application.application_status == 'accepted' %}bg-success
+                                    {% elif application.application_status == 'rejected' %}bg-danger
+                                    {% else %}bg-secondary{% endif %}">
+                        {{ application.application_status }}
+                    </span>
+                </td>
+                <td>
+                    {% if application.application_status == 'pending' %}
+                        <form action="{{ url_for('main.update_application_status', application_id=application.id) }}" method="POST">
+                            <button type="submit" name="status" value="accepted" class="btn btn-success btn-sm">Accept</button>
+                            <button type="submit" name="status" value="rejected" class="btn btn-danger btn-sm">Reject</button>
+                        </form>
+                    {% else %}
+                        <span class="text-muted">Reviewed</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

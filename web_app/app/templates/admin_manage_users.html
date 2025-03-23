@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Users{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Manage Users</h2>
+    
+    <table class="table table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    {% if user.status == 'active' %}
+                        <span class="badge bg-success">Active</span>
+                    {% else %}
+                        <span class="badge bg-warning">Inactive</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if user.status == 'inactive' %}
+                        <a href="{{ url_for('main.activate_user', user_id=user.id) }}" class="btn btn-success btn-sm">Activate</a>
+                    {% else %}
+                        <a href="{{ url_for('main.deactivate_user', user_id=user.id) }}" class="btn btn-danger btn-sm">Deactivate</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Job Listings{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Available Jobs</h2>
+
+    <table class="table table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Skills</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for job in jobs %}
+            <tr>
+                <td>{{ job.title }}</td>
+                <td>{{ job.description }}</td>
+                <td>{{ job.skills_required }}</td>
+                <td>
+                    <form action="{{ url_for('main.apply_job', job_id=job.id) }}" method="POST" enctype="multipart/form-data">
+                        <input type="file" name="resume" required>
+                        <button type="submit" class="btn btn-success btn-sm">Apply</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

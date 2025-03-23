@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Apply for Exam{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Apply for {{ exam.exam_name }}</h2>
+    <form action="{{ url_for('main.apply_exam', exam_id=exam.id) }}" method="POST" enctype="multipart/form-data">
+    
+        <div class="mb-3">
+            <label for="pan_card" class="form-label">PAN Card Number</label>
+            <input type="text" class="form-control" id="pan_card" name="pan_card" required>
+        </div>
+    
+        <div class="mb-3">
+            <label for="pan_card_image" class="form-label">Upload PAN Card Image</label>
+            <input type="file" class="form-control" id="pan_card_image" name="pan_card_image" accept="image/*" required>
+        </div>
+    
+        <div class="mb-3">
+            <label for="aadhar_card" class="form-label">Aadhar Card Number</label>
+            <input type="text" class="form-control" id="aadhar_card" name="aadhar_card" required>
+        </div>
+    
+        <div class="mb-3">
+            <label for="aadhar_card_image" class="form-label">Upload Aadhar Card Image</label>
+            <input type="file" class="form-control" id="aadhar_card_image" name="aadhar_card_image" accept="image/*" required>
+        </div>
+    
+        <button type="submit" class="btn btn-primary">Apply</button>
+    </form>
+    
+</div>
+{% endblock %}

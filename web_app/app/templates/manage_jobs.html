@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Manage Job Applications{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Manage Job Applications</h2>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Job Title</th>
+                <th>Candidate Name</th>
+                <th>Similarity Score</th>
+                <th>Skills Match</th>
+                <th>Missing Skills</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for application in job_applications %}
+            <tr>
+                <td>{{ application.job.title }}</td>
+                <td>{{ application.user.name }}</td>
+                <td>{{ application.similarity_score }}%</td>
+                <td>{{ application.skills_matched }}</td>
+                <td>{{ application.missing_skills }}</td>
+                <td>{{ application.application_status }}</td>
+                <td>
+                    <a href="{{ url_for('static', filename='resumes/' + application.resume) }}" download>
+                        📄 Download Resume
+                    </a>
+                </td>
+                <td>
+                    {% if application.application_status == "pending" %}
+                        <a href="{{ url_for('main.approve_job', application_id=application.id) }}" class="btn btn-success btn-sm">Approve</a>
+                        <a href="{{ url_for('main.reject_job', application_id=application.id) }}" class="btn btn-danger btn-sm">Reject</a>
+                    {% else %}
+                        <span class="text-muted">Processed</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

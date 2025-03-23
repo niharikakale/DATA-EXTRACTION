@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}My Exam Applications{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>My Exam Applications</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Exam Name</th>
+                <th>Entered PAN</th>
+                <th>Extracted PAN</th>
+                <th>Entered Aadhar</th>
+                <th>Extracted Aadhar</th>
+                <th>DOB Matched</th>
+                <th>ID Matched</th>
+                <th>Status</th>
+                <th>Applied Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for app in applications %}
+            <tr>
+                <td>{{ app.id }}</td>
+                <td>{{ app.exam_name }}</td>
+                <td>{{ app.entered_pan }}</td>
+                <td>{{ app.extracted_pan if app.extracted_pan else 'OCR Failed' }}</td>
+                <td>{{ app.entered_aadhar }}</td>
+                <td>{{ app.extracted_aadhar if app.extracted_aadhar else 'OCR Failed' }}</td>
+                <td>
+                    {% if app.dob_matched %}
+                        ✅ Yes
+                    {% else %}
+                        ❌ No
+                    {% endif %}
+                </td>
+                <td>
+                    {% if app.id_number_matched %}
+                        ✅ Yes
+                    {% else %}
+                        ❌ No
+                    {% endif %}
+                </td>
+                <td>{{ app.application_status }}</td>
+                <td>{{ app.applied_at.strftime('%Y-%m-%d %H:%M') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+</div>
+{% endblock %}

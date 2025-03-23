@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Exam Applications{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Manage Exam Applications</h2>
+    <table class="table table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>Applicant Name</th>
+                <th>Exam Name</th>
+                <th>Entered PAN</th>
+                <th>Extracted PAN</th>
+                <th>Entered Aadhar</th>
+                <th>Extracted Aadhar</th>
+                <th>DOB Matched</th>
+                <th>ID Matched</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for app in applications %}
+            <tr>
+                <td>{{ app.applicant_name }}</td>
+                <td>{{ app.exam_name }}</td>
+                <td>{{ app.entered_pan }}</td>
+                <td class="{% if app.entered_pan != app.extracted_pan %}text-danger{% endif %}">
+                    {{ app.extracted_pan if app.extracted_pan else "Not Available" }}
+                </td>
+                <td>{{ app.entered_aadhar }}</td>
+                <td class="{% if app.entered_aadhar != app.extracted_aadhar %}text-danger{% endif %}">
+                    {{ app.extracted_aadhar if app.extracted_aadhar else "Not Available" }}
+                </td>
+                <td class="{% if not app.dob_matched %}text-danger{% endif %}">
+                    {% if app.dob_matched %}✅ Yes{% else %}❌ No{% endif %}
+                </td>
+                <td class="{% if not app.id_number_matched %}text-danger{% endif %}">
+                    {% if app.id_number_matched %}✅ Yes{% else %}❌ No{% endif %}
+                </td>
+                <td>
+                    <span class="badge {% if app.application_status == 'pending' %}bg-warning
+                                    {% elif app.application_status == 'accepted' %}bg-success
+                                    {% elif app.application_status == 'rejected' %}bg-danger
+                                    {% else %}bg-secondary{% endif %}">
+                        {{ app.application_status }}
+                    </span>
+                </td>
+                <td>
+                    {% if app.application_status == 'pending' %}
+                        <form action="{{ url_for('main.update_exam_application_status', application_id=app.id) }}" method="POST">
+                            <button type="submit" name="status" value="accepted" class="btn btn-success btn-sm">Accept</button>
+                            <button type="submit" name="status" value="rejected" class="btn btn-danger btn-sm">Reject</button>
+                        </form>
+                    {% else %}
+                        <span class="text-muted">Reviewed</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

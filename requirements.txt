@@ -1,0 +1,17 @@
+flask
+flask_sqlalchemy
+flask_migrate
+flask_wtf
+flask_login
+flask_bcrypt
+flask_session
+pandas
+numpy
+requests
+werkzeug
+gunicorn
+psycopg2
+email_validator
+python-dotenv
+openpyxl
+xlrd

@@ -13,8 +13,15 @@ import re
 from werkzeug.utils import secure_filename
 import numpy as np
 from app.utils import extract_text_from_pdf, extract_ielts_details
+
+
+# Automatically detect Tesseract path
+
+
 import pytesseract
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+
+
+pytesseract.pytesseract.tesseract_cmd = r"C:\Users\NIHARIKA\PycharmProjects\DATA EXTRACTION\web_app\tesseract.exe"
 
 main = Blueprint('main', __name__)
 @main.route('/')
@@ -1178,4 +1185,3 @@ def apply_consulting():
 
         flash("Consulting application submitted successfully!", "success")
         return redirect(url_for('main.user_dashboard'))
-

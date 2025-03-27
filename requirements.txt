@@ -15,3 +15,14 @@ email_validator
 python-dotenv
 openpyxl
 xlrd
+pymysql
+pdfplumber
+docx
+python-docx
+nltk
+scikit-learn
+OpenCV-python
+fitz
+pytesseract
+frontend
+tools

@@ -10,7 +10,7 @@ numpy
 requests
 werkzeug
 gunicorn
-psycopg2
+psycopg2-binary
 email_validator
 python-dotenv
 openpyxl
